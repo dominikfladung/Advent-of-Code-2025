@@ -9,6 +9,7 @@ source = { editable = "." }
 dependencies = [
     { name = "ipykernel" },
     { name = "loguru" },
+    { name = "numpy" },
     { name = "pandas" },
     { name = "pydantic" },
     { name = "tqdm" },
@@ -25,6 +26,7 @@ dev = [
 requires-dist = [
     { name = "ipykernel", specifier = ">=7.1.0" },
     { name = "loguru", specifier = ">=0.7.3" },
+    { name = "numpy", specifier = ">=2.3.5" },
     { name = "pandas", specifier = ">=2.3.3" },
     { name = "pydantic", specifier = ">=2.12.5" },
     { name = "tqdm", specifier = ">=4.67.1" },
