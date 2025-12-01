@@ -8,22 +8,27 @@ import sys
 import requests
 from bs4 import BeautifulSoup
 
+from adventOfCode.paths import TEMPLATE_PATH, PUZZLES_DIR
+
 
 class PuzzleTemplateGenerator:
     """Generates a new puzzle template"""
 
-    def get_template(self):
+    @staticmethod
+    def get_template():
         """Returns the template for the new day"""
-        with open("./template.ipynb", "r", encoding="utf-8") as f:
-            return json.load(f);
+        with open(TEMPLATE_PATH, "r", encoding="utf-8") as f:
+            return json.load(f)
 
-    def find_code(self, element, min_length):
+    @staticmethod
+    def find_code(element, min_length):
         """Finds code in the element"""
         codes = element.find_all("code")
         for code in codes:
             if len(code.get_text()) >= min_length:
                 return code.get_text()
-       
+        return None
+
     def fill_template(self, template, day):
         """Fills the template with the day"""
         
@@ -45,9 +50,10 @@ class PuzzleTemplateGenerator:
 
         return template
 
-    def write_template(self, template, day):
+    @staticmethod
+    def write_template(template: str, day: str):
         """Writes the template to the file"""
-        with open(f"./{str(day).zfill(2)}.ipynb", "w", encoding="utf-8") as f:
+        with open(PUZZLES_DIR / f"{str(day).zfill(2)}.ipynb", "w", encoding="utf-8") as f:
             json.dump(template, f, ensure_ascii=False, indent=4)
 
     def make_new_day(self, day):
@@ -56,16 +62,17 @@ class PuzzleTemplateGenerator:
         template = self.fill_template(template, day)
         self.write_template(template, day)
 
-    def request_soup(self, day):
+    @staticmethod
+    def request_soup(day):
         """requests the soup of the website"""
-        url = f"https://adventofcode.com/2023/day/{day}"
+        url = f"https://adventofcode.com/2025/day/{day}"
         response = requests.get(url, timeout=5)
 
         # Check if the request was successful
         if response.status_code == 200:
             # Parse the HTML content of the page
             return BeautifulSoup(response.text, 'html.parser')
-        
+
         raise f"Failed to retrieve the webpage. Status code: {response.status_code}"
 
 if __name__ == "__main__":
