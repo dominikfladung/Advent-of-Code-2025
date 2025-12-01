@@ -1,0 +1,23 @@
+[project]
+name = "advent-of-code-2025"
+version = "1.0.0"
+description = "Code for Advent of Code 2025 challenges"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "beautifulsoup4>=4.14.3",
+    "ipykernel>=7.1.0",
+    "loguru>=0.7.3",
+    "pandas>=2.3.3",
+    "pydantic>=2.12.5",
+    "requests>=2.32.5",
+    "tqdm>=4.67.1",
+]
+
+[build-system]
+requires = ["uv_build>=0.9.10,<0.10.0"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name="adventOfCode"
+packages = ["src/adventOfCode"]
